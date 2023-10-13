@@ -23,39 +23,59 @@ public class MatrizSimetrica {
     }
 
     public static void rellenarMatriz(int[][] matriz, int x, int y){
-        if(y == matriz[y].length){
+        if (x < matriz.length) {
+            if (y < matriz[x].length) {
+                int input = stdinput.nextInt();
+                matriz[x][y] = (int) Math.sqrt(input);
+                rellenarMatriz(matriz, x, y + 1);
+            } else {
+                rellenarMatriz(matriz, x + 1, 0);
+            }
+        }
+        // if(y == matriz[y].length){
     
-        }else if(x == matriz[x].length){
-            rellenarMatriz(matriz, 0, y+1);
-        }else{
-            int input = stdinput.nextInt();
-            input = (int) Math.sqrt(input);
-            matriz[x][y] = input;
-            rellenarMatriz(matriz, x+1, y);
-        }    
+        // }else if(x == matriz[x].length){
+        //     rellenarMatriz(matriz, 0, y+1);
+        // }else{
+        //     int input = stdinput.nextInt();
+        //     input = (int) Math.sqrt(input);
+        //     matriz[x][y] = input;
+        //     rellenarMatriz(matriz, x+1, y);
+        //}    
     } 
     
     public static void transponer(int[][] matriz,int[][] matrizT, int x, int y){
-        if(y == matriz[y].length){
-    
-        }else if(x == matriz[x].length){
-            transponer(matriz, matrizT, 0, y+1);
-        }else{
-            matrizT[y][x] = matriz[x][y];
-            transponer(matriz, matrizT, x+1, y);
-        }    
+        if (x < matriz.length) {
+            if (y < matriz[x].length) {
+                matrizT[y][x] = matriz[x][y];
+                transponer(matriz, matrizT, x, y + 1);
+            } else {
+                transponer(matriz, matrizT,  x + 1, 0);
+            }
+        }  
     } 
 
     public static boolean comprobarSimetria(int[][] matriz,int[][] matrizT, int x, int y){
-        if(y == matriz[y].length){
-            return true;
-        }else if(x == matriz[x].length){
-            return comprobarSimetria(matriz, matrizT, 0, y+1);
-        }else{
-            if(matriz[x][y] != matrizT[x][y]){
+        if (x < matriz.length) {
+            if (y < matriz[x].length) {
+                if(matriz[x][y] != matrizT[x][y]){
                 return false;
+                }
+                return comprobarSimetria(matriz, matrizT, x, y+1);
+            } else {
+                return comprobarSimetria(matriz, matrizT, x+1, 0);
             }
-            return comprobarSimetria(matriz, matrizT, x+1, y);
-        } 
+        }
+        return true;
+    //     if(y == matriz[y].length){
+    //         return true;
+    //     }else if(x == matriz[x].length){
+    //         return comprobarSimetria(matriz, matrizT, 0, y+1);
+    //     }else{
+    //         if(matriz[x][y] != matrizT[x][y]){
+    //             return false;
+    //         }
+    //         return comprobarSimetria(matriz, matrizT, x+1, y);
+    //     } 
     }
 }
