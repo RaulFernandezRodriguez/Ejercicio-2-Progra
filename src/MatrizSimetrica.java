@@ -13,9 +13,9 @@ public class MatrizSimetrica {
             transponer(matriz, matrizT, 0, 0);
             boolean simetric = comprobarSimetria(matriz, matrizT, 0, 0);
             if(simetric == true){
-                System.out.println("Es simétrica la raiz cuadrada entera de la matriz de entrada");
+                System.out.println("Es simétrica la raíz cuadrada entera de la matriz de entrada.");
             }else{
-                System.out.println("No es simétrica la raiz cuadrada entera de la matriz de entrada");
+                System.out.println("No es simétrica la raíz cuadrada entera de la matriz de entrada.");
             }
         }else{            
             System.out.println("Entrada errónea");
