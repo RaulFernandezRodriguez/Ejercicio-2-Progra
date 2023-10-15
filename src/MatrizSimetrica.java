@@ -6,6 +6,7 @@ public class MatrizSimetrica {
     static final Scanner stdinput = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         int size = stdinput.nextInt();
+        stdinput.nextLine();
         if(size > 0){
             int[][] matriz = new int[size][size];
             int[][] matrizT = new int[size][size];
@@ -26,15 +27,17 @@ public class MatrizSimetrica {
     public static void rellenarMatriz(int[][] matriz, int x, int y){
         if(x < matriz.length){
             String filaInput = stdinput.nextLine();
-            String[] fila = filaInput.split(" ");
-            rellenarFila(matriz, x, 0, fila);
-            rellenarMatriz(matriz, x+1, y);
+            if (!filaInput.trim().isEmpty()) {
+                String[] fila = filaInput.split(" ");
+                rellenarFila(matriz, x, 0, fila);
+                rellenarMatriz(matriz, x+1, 0);
+            }
         }
     } 
     
     public static void rellenarFila(int[][] matriz, int x, int y, String[] fila){
-        if(y < matriz[y].length){
-            matriz[x][y] = Integer.parseInt(fila[x]);
+        if(y < matriz[x].length){
+            matriz[x][y] = Integer.parseInt(fila[y]);
             rellenarFila(matriz, x, y+1, fila);
         }
     }
@@ -57,15 +60,15 @@ public class MatrizSimetrica {
     } 
 
     public static boolean comprobarSimetria(int[][] matriz,int[][] matrizT, int x, int y){
-        if (x == matriz[x].length) {
+        if (x == matriz.length) {
             return true;
-        }else if(matriz[x][y] == matrizT[x][y]){
-            if(y < matriz[x].length){
+        }else if(y == matriz[x].length){
+            return comprobarSimetria(matriz, matrizT, x+1, 0);
+        }else{
+            if(matriz[x][y] == matrizT[x][y]){
                 return comprobarSimetria(matriz, matrizT, x, y+1);
-            } else {
-                return comprobarSimetria(matriz, matrizT, x+1, 0);
-            }
-        }else return false;
+            }else return false;
+        } 
     }
     //     if(y == matriz[y].length){
     //         return true;
