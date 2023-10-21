@@ -3,21 +3,25 @@ import java.math.BigInteger;
 public class MatrizSimetrica {
     static final Scanner stdinput = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-        int size = stdinput.nextInt();
-        stdinput.nextLine();
-        if(size > 0){
-            int[][] matriz = new int[size][size];
-            int[][] matrizT = new int[size][size];
-            rellenarMatriz(matriz, 0, 0);
-            stdinput.close();
-            transponer(matriz, matrizT, 0, 0);
-            boolean simetric = comprobarSimetria(matriz, matrizT, 0, 0);
-            if(simetric == true){
-                System.out.println("Es simétrica la raíz cuadrada entera de la matriz de entrada.");
-            }else{
-                System.out.println("No es simétrica la raíz cuadrada entera de la matriz de entrada.");
+        if (stdinput.hasNextInt()) {
+            int size = stdinput.nextInt();
+            stdinput.nextLine();
+            if(size > 0){
+                int[][] matriz = new int[size][size];
+                int[][] matrizT = new int[size][size];
+                rellenarMatriz(matriz, 0, 0);
+                stdinput.close();
+                transponer(matriz, matrizT, 0, 0);
+                boolean simetric = comprobarSimetria(matriz, matrizT, 0, 0);
+                if(simetric){
+                    System.out.println("Es simétrica la raíz cuadrada entera de la matriz de entrada.");
+                }else{
+                    System.out.println("No es simétrica la raíz cuadrada entera de la matriz de entrada.");
+                }
+            }else{            
+                System.out.println("Entrada errónea");
             }
-        }else{            
+        } else {
             System.out.println("Entrada errónea");
         }
     } 
@@ -27,6 +31,7 @@ public class MatrizSimetrica {
             String filaInput = stdinput.nextLine();
             if (!filaInput.trim().isEmpty()) {
                 String[] fila = filaInput.split(" ");
+                assert fila.length == matriz[y].length;
                 rellenarFila(matriz, x, 0, fila);
                 rellenarMatriz(matriz, x+1, 0);
             }
